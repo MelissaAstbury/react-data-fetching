@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import * as api from "../api";
+import * as api from "../../api";
 import {Link} from "@reach/router";
-import Filter from "./Filter";
+import Filter from "../Filter/Filter";
 
-import "./AllStudents.css"
+import "./StudentList.css"
 
 class AllStudents extends Component {
   state = {

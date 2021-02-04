@@ -1,15 +1,16 @@
-import "./App.css";
-import AllStudents from "./components/AllStudents";
-import Title from "./components/Title";
-import { Router } from "@reach/router";
-import Student from "./components/Student";
+import './App.css';
+import { Router } from '@reach/router';
+
+import StudentList from './components/StudentList/StudentList';
+import Title from './components/Title/Title';
+import Student from './components/Student/Student';
 
 function App() {
   return (
     <div className="App">
       <Title />
       <Router>
-        <AllStudents path="/" />
+        <StudentList path="/" />
         <Student path="/:studentId" />
       </Router>
     </div>
