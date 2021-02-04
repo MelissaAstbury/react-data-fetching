@@ -1,30 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
- class Filter extends Component {
-     state = {
-         block: ["graduate", "front-end", "backend", "fundamentals", "project"]
-     }
+class Filter extends Component {
+  state = {
+    block: ['all', 'grad', 'fe', 'be', 'fun', 'proj'],
+  };
 
-     handleSubmit = (event) => {
-        console.log(event)
-     }
+  handleChange = (event) => {
+    this.props.filterByBlock(event.target.value);
+  };
 
-     handleChange = (event) => {
-         console.log(event.target.value)
-     }
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Student Block</label>
-                <select onChange={this.handleChange}>
-                    {this.state.block.map((item) => {
-                        return <option key={item} value={item}>{item}</option>
-                    })}
-                </select>
-                <button type="submit">Search</button>
-            </form>
-        )
-    }
-};
+  render() {
+    return (
+      <form>
+        <label>Student Block</label>
+        <select onChange={this.handleChange}>
+          {this.state.block.map((item) => {
+            return (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            );
+          })}
+        </select>
+      </form>
+    );
+  }
+}
 
 export default Filter;
