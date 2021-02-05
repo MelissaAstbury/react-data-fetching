@@ -5,7 +5,6 @@ export const fetchAllStudents = () => {
 };
 
 export const fetchStudent = (studentId) => {
-  console.log(studentId, 'here');
   return fetch(
     `https://nc-student-tracker.herokuapp.com/api/students/${studentId}`
   ).then((res) => res.json());

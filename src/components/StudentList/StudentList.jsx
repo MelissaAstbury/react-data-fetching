@@ -8,20 +8,31 @@ import './StudentList.css';
 class AllStudents extends Component {
   state = {
     students: [],
-    chosenBlock: 'grad',
+    chosenBlock: 'all',
     chosenOption: false,
   };
 
-  componentDidMount() {
+  fetchStudents = () => {
     api
       .fetchAllStudents()
       .then(({ students }) => {
         this.setState({ students });
       })
       .catch(console.error);
+  };
+
+  componentDidMount() {
+    this.fetchStudents();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.chosenBlock !== this.state.chosenBlock) {
+      this.fetchStudents();
+    }
   }
 
   filterByBlock = (chosenBlock) => {
+    // this.fetchStudents();
     this.setState({ chosenBlock: chosenBlock, chosenOption: true });
   };
 
@@ -34,6 +45,7 @@ class AllStudents extends Component {
           {this.state.chosenOption
             ? students.map((student) => {
                 if (student.currentBlock === this.state.chosenBlock) {
+                  console.log('top');
                   return (
                     <li className="student" key={student._id}>
                       <Link to={`/${student._id}`}>
@@ -43,7 +55,7 @@ class AllStudents extends Component {
                     </li>
                   );
                 } else if (this.state.chosenBlock === 'all') {
-                  console.log('here');
+                  console.log('middle');
                   return (
                     <li className="student" key={student._id}>
                       <Link to={`/${student._id}`}>
@@ -52,8 +64,6 @@ class AllStudents extends Component {
                       <p>{student.currentBlock}</p>
                     </li>
                   );
-                } else {
-                  console.log('bottom');
                 }
               })
             : students.map((student) => {
